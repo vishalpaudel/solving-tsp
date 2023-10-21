@@ -15,11 +15,11 @@ def read_test_case():
     num_cities = int(lines[1])
     data_lines = lines[2:]
 
-    # Split and parse the data into city_locations and distances
+    # Split and parse the data into city_loc(ations) and dist_mat(rix)
     data = [list(map(float, line.split())) for line in data_lines]
-    city_locations, distances = np.array(data[:num_cities]), np.array(data[num_cities:])
+    city_loc, dist_mat = np.array(data[:num_cities]), np.array(data[num_cities:])
 
-    return heuristic, num_cities, city_locations, distances
+    return heuristic, num_cities, city_loc, dist_mat
 
 
 def gen_euclidean_test_case(N):
@@ -51,6 +51,7 @@ def gen_euclidean_test_case(N):
     # Print the distance matrix
     for row in distance_matrix:
         print(" ".join(map(str, row)))
+
 
 if __name__ == "__main__":
     num_cities = 20

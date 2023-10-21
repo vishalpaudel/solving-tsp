@@ -7,7 +7,7 @@ class Ant:
         self.num_cities = len(graph)
 
         self.N = graph.num_cities
-        self.D = graph.D
+        self.D = graph.distance_matrix
 
         self.P = np.where(self.D == 0, 0, 1 / (self.D**alpha))
         np.fill_diagonal(self.P, 0.0)

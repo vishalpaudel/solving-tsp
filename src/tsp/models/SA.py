@@ -14,7 +14,9 @@ from ..Graph import Graph
 
 
 class SA:
-    def __init__(self, graph: Graph, *, init_temp: float, num_iter: float, cool_rate: float):
+    def __init__(
+        self, graph: Graph, *, init_temp: float, num_iter: float, cool_rate: float
+    ):
         self.graph = graph
 
         self.init_temp = init_temp
@@ -22,18 +24,20 @@ class SA:
         self.cool_rate = cool_rate
 
     def simulated_annealing(self, cand_sol: np.ndarray):
-        """ cand_sol: a starting candidate solution """
+        """cand_sol: a starting candidate solution"""
         # modify the current tour (in hopes of improvement)
         modified_tour = self.modify_tour()
 
     def modify_tour(self, cur_tour):
-        return 
-    
-    
+        return
+
     def _3opt_improvement():
         pass
 
     def _2opt_improvement(self, cur_tour: np.ndarray):
+        """
+        Performs a random swapping operation of two edges in the current tour.
+        """
         pass
 
     def _random_swapping(self, cur_tour: np.ndarray):

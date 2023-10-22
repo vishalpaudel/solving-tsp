@@ -1,6 +1,10 @@
+import numpy as np
+
+from ..utils import read_test_case
 
 class Graph:
-    def __init__(self, heuristic, num_cities, city_loc, dist_mat):
+    def __init__(self):
+        heuristic, num_cities, city_loc, dist_mat = read_test_case()
         self.heuristic = heuristic
         self.num_cities = num_cities
         self.city_loc = city_loc

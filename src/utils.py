@@ -7,6 +7,13 @@ import math
 import random
 
 def read_test_case():
+
+    # Reading input
+    # heuristic = input().strip()
+    # num_cities = int(input().strip())
+    # city_loc = [list(map(float, input().strip().split())) for _ in range(N)]
+    # dist_mat = [list(map(float, input().strip().split())) for _ in range(N)]
+
     # Read input and split into lines
     lines = sys.stdin.read().strip().split("\n")
 

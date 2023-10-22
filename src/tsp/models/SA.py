@@ -27,9 +27,13 @@ class SA:
         """cand_sol: a starting candidate solution"""
         # modify the current tour (in hopes of improvement)
         modified_tour = self.modify_tour()
+        neighbour_cost 
+
+        
+
 
     def modify_tour(self, cur_tour):
-        return
+        return self._random_swapping(cur_tour)
 
     def _3opt_improvement():
         pass

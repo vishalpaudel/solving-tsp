@@ -10,7 +10,7 @@ import time
 import numpy as np
 import random
 
-from ..Graph import Graph
+from Graph import Graph
 
 
 class SA:
@@ -19,17 +19,43 @@ class SA:
     ):
         self.graph = graph
 
-        self.init_temp = init_temp
+        self.temp = init_temp
         self.num_iter = num_iter
         self.cool_rate = cool_rate
 
+        self.best_cost = np.inf
+        self.best_tour = []
+
+        print("Simulated Annealing model instantiated!")
+
     def simulated_annealing(self, cand_sol: np.ndarray):
         """cand_sol: a starting candidate solution"""
-        # modify the current tour (in hopes of improvement)
-        modified_tour = self.modify_tour()
-        neighbour_cost 
+        cur_sol = cand_sol
+        cur_cost = self.graph.tour_cost(cand_sol)
 
-        
+        # for the number of iteratations
+        cur_iter = 0
+        while cur_iter < self.num_iter:
+            print(cur_iter, self.num_iter)
+            # modify the current tour (in hopes of improvement)
+            mod_sol = self.modify_tour(cur_sol)
+            mod_cost = self.graph.tour_cost(mod_sol)
+
+            if mod_cost < cur_cost or random.random() < np.exp(
+                (cur_cost- mod_cost) / self.temp
+            ):
+                cur_sol = mod_sol
+                cur_cost = mod_cost
+
+            if cur_cost < self.best_cost:
+                self.best_tour = cur_sol.copy()
+                self.best_cost = cur_cost
+
+            self.temp *= self.cool_rate
+
+            cur_iter += 1
+
+        return self.best_cost, self.best_tour
 
 
     def modify_tour(self, cur_tour):
@@ -65,29 +91,36 @@ class SA:
 
         return new_tour
 
-
 def main():
-    cities = np.arange(N)
 
     # Set parameters
-    initial_temperature = 1000.0
-    num_iterations = 300000
-    cooling_rate = 0.99995
+    init_temp = 1000.0
+    num_iter = 3
+    cool_rate = 0.99995
+
+    graph = Graph()
+    one_sim_annel = SA(graph, init_temp=init_temp, num_iter=num_iter, cool_rate=cool_rate)
+
+    cities = np.arange(graph.num_cities)
 
     start_time = time.time()
 
     # Generate an initial solution (random permutation of cities)
     init_sol = list(np.random.permutation(cities))
 
-    # Apply simulated annealing
-    best_solution, best_cost = simulated_annealing(init_sol)
+    one_sim_annel.simulated_annealing(init_sol)
 
     end_time = time.time()
 
     # Output the best solution and cost
-    print("Best Tour:", best_solution)
-    print("Best Cost:", best_cost)
+    print("Best Tour:", one_sim_annel.best_tour)
+    print("Best Cost:", one_sim_annel.best_cost)
     print("Time: ", end_time - start_time)
+
+
+if __name__ == "__main__":
+    main()
+
 
 
 if __name__ == "__main__":

@@ -1,6 +1,6 @@
 import numpy as np
 
-from ..utils import read_test_case
+from utils import read_test_case 
 
 class Graph:
     def __init__(self):
@@ -18,6 +18,6 @@ class Graph:
         tour_cost = 0.0
 
         for i in range(self.num_cities):
-            tour_cost += self.dist_mat[tour[i], tour[(i + 1) % N]]
+            tour_cost += self.dist_mat[tour[i], tour[(i + 1) % self.num_cities]]
 
-        return tour_cost        
+        return tour_cost

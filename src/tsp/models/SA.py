@@ -10,7 +10,7 @@ import time
 import numpy as np
 import random
 
-from Graph import Graph
+from ..Graph import Graph
 
 
 class SA:
@@ -42,7 +42,7 @@ class SA:
             mod_cost = self.graph.tour_cost(mod_sol)
 
             if mod_cost < cur_cost or random.random() < np.exp(
-                (cur_cost- mod_cost) / self.temp
+                (cur_cost - mod_cost) / self.temp
             ):
                 cur_sol = mod_sol
                 cur_cost = mod_cost
@@ -56,7 +56,6 @@ class SA:
             cur_iter += 1
 
         return self.best_cost, self.best_tour
-
 
     def modify_tour(self, cur_tour):
         return self._random_swapping(cur_tour)
@@ -91,15 +90,17 @@ class SA:
 
         return new_tour
 
-def main():
 
+def main():
     # Set parameters
     init_temp = 1000.0
     num_iter = 3
     cool_rate = 0.99995
 
     graph = Graph()
-    one_sim_annel = SA(graph, init_temp=init_temp, num_iter=num_iter, cool_rate=cool_rate)
+    one_sim_annel = SA(
+        graph, init_temp=init_temp, num_iter=num_iter, cool_rate=cool_rate
+    )
 
     cities = np.arange(graph.num_cities)
 
@@ -120,7 +121,6 @@ def main():
 
 if __name__ == "__main__":
     main()
-
 
 
 if __name__ == "__main__":

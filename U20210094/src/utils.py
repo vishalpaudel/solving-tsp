@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-from numpy import array
+import numpy as np
 import sys
 
 import math
@@ -24,7 +24,7 @@ def read_test_case():
 
     # Split and parse the data into city_loc(ations) and dist_mat(rix)
     data = [list(map(float, line.split())) for line in data_lines]
-    city_loc, dist_mat = array(data[:num_cities]), array(data[num_cities:])
+    city_loc, dist_mat = np.array(data[:num_cities]), np.array(data[num_cities:])
 
     return heuristic, num_cities, city_loc, dist_mat
 

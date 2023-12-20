@@ -1,6 +1,6 @@
-import numpy as np
+from numpy import ndarray, float64
+from ..utils import read_test_case
 
-from utils import read_test_case 
 
 class Graph:
     def __init__(self):
@@ -10,7 +10,7 @@ class Graph:
         self.city_loc = city_loc
         self.dist_mat = dist_mat
 
-    def tour_cost(self, tour: np.ndarray) -> float:
+    def tour_cost(self, tour: ndarray) -> float64:
         """
         tour: the tour for which the distance is to be calculated
         dist_mat: the distance matrix
@@ -18,6 +18,9 @@ class Graph:
         tour_cost = 0.0
 
         for i in range(self.num_cities):
-            tour_cost += self.dist_mat[tour[i], tour[(i + 1) % self.num_cities]]
+            cur_city = i
+            next_city = (i + 1) % self.num_cities
+
+            tour_cost += self.dist_mat[tour[cur_city], tour[next_city]]
 
         return tour_cost
